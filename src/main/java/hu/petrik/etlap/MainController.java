@@ -1,14 +1,19 @@
 package hu.petrik.etlap;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class MainController {
+    @FXML
+    private Label kivalasztottElem;
     @FXML
     private TableView<Etlap> etlapTable;
     @FXML
@@ -42,5 +47,10 @@ public class MainController {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    public void selectedItem(MouseEvent mouseEvent) {
+        // Javít
+        kivalasztottElem.setText(etlapTable.getSelectionModel().getSelectedItem().toString());
     }
 }
