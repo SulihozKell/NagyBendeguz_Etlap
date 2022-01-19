@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.etlap.MainController">
+   <children>
+      <TableView fx:id="etlapTable" prefHeight="200.0" prefWidth="500.0">
+        <columns>
+            <TableColumn fx:id="nevOszlop" prefWidth="100.0" text="Név" />
+            <TableColumn fx:id="leirasOszlop" prefWidth="250.0" text="Leírás" />
+            <TableColumn fx:id="arOszlop" prefWidth="50.0" text="Ár" />
+            <TableColumn fx:id="kategoriaOszlop" prefWidth="198.0" text="Kategória" />
+        </columns>
+      </TableView>
+   </children>
+</VBox>
