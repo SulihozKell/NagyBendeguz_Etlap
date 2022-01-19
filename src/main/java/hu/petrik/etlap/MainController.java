@@ -14,8 +14,6 @@ public class MainController {
     @FXML
     private TableColumn<Etlap, String> nevOszlop;
     @FXML
-    private TableColumn<Etlap, String> leirasOszlop;
-    @FXML
     private TableColumn<Etlap, Integer> arOszlop;
     @FXML
     private TableColumn<Etlap, String> kategoriaOszlop;
@@ -23,10 +21,8 @@ public class MainController {
 
     public void initialize() {
         nevOszlop.setCellValueFactory(new PropertyValueFactory<>("nev"));
-        leirasOszlop.setCellValueFactory(new PropertyValueFactory<>("leiras"));
         arOszlop.setCellValueFactory(new PropertyValueFactory<>("ar"));
         kategoriaOszlop.setCellValueFactory(new PropertyValueFactory<>("kategoria"));
-        tablazatEtlapFeltolt();
         try {
             db = new EtlapDb();
             tablazatEtlapFeltolt();
