@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.collections.FXCollections?>
+<GridPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="hu.petrik.etlap.controllers.FelvetelController" prefHeight="400.0" prefWidth="600.0">
+    <Label text="Név" />
+    <Label text="Leírás" GridPane.rowIndex="1" />
+    <Label text="Ár" GridPane.rowIndex="2" />
+    <Label text="Kategória" GridPane.rowIndex="3" />
+    <TextField fx:id="inputNev" minWidth="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    <TextField fx:id="inputLeiras" minWidth="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    <Spinner fx:id="inputAr" editable="true" minWidth="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <valueFactory>
+            <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="100" initialValue="1000" max="99999" min="1" />
+        </valueFactory>
+    </Spinner>
+    <ChoiceBox fx:id="inputKategoria" minWidth="100.0" prefWidth="200.0" value="5" GridPane.columnIndex="1" GridPane.rowIndex="3">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="előétel" />
+                <String fx:value="főétel" />
+                <String fx:value="desszert" />
+            </FXCollections>
+        </items>
+    </ChoiceBox>
+    <Button minWidth="100.0" mnemonicParsing="false" onAction="#onFelvetelButtonClick" prefWidth="200.0" text="Új étel felvétele" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+</GridPane>

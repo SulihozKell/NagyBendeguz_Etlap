@@ -1,17 +1,21 @@
-package hu.petrik.etlap;
+package hu.petrik.etlap.controllers;
 
+import hu.petrik.etlap.Controller;
+import hu.petrik.etlap.Etlap;
+import hu.petrik.etlap.EtlapDb;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class MainController {
+public class MainController extends Controller {
     @FXML
     private Label kivalasztottElem;
     @FXML
@@ -52,5 +56,15 @@ public class MainController {
     public void selectedItem(MouseEvent mouseEvent) {
         // Javít
         kivalasztottElem.setText(etlapTable.getSelectionModel().getSelectedItem().toString());
+    }
+
+    public void onFelvetelButtonClick(ActionEvent actionEvent) {
+        try {
+            Controller felvesz = ujAblak("felvetel-view.fxml", "Új étel felvétele", 540, 400);
+            felvesz.getStage().setOnCloseRequest(event -> tablazatEtlapFeltolt());
+            felvesz.getStage().show();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 }
