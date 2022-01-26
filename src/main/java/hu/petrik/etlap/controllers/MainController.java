@@ -67,4 +67,14 @@ public class MainController extends Controller {
             System.out.println(e);
         }
     }
+
+    public void onTorlesButtonClick(ActionEvent actionEvent) {
+        int selectedIndexd = etlapTable.getSelectionModel().getSelectedIndex();
+        if (selectedIndexd == -1) {
+            alert("A törléshez előbb ki kell választani egy elemet a táblázatból.");
+            return;
+        }
+        Etlap torlendoEtlap = etlapTable.getSelectionModel().getSelectedItem();
+        // Folytat
+    }
 }
