@@ -26,24 +26,32 @@ public class FelvetelController extends Controller {
         String leiras = inputLeiras.getText().trim();
         int ar = 0;
         String kategoria = inputKategoria.getSelectionModel().getSelectedItem();
-        /*if (nev.isEmpty() || leiras.isEmpty()) {
-
-        }*/
-        ar = inputAr.getValue();
-
+        try {
+            ar = inputAr.getValue();
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
+        if (nev.isEmpty() || leiras.isEmpty()) {
+            alert("Nem hagyható üresen egy mező sem.");
+            return;
+        }
+        if (ar < 1 || ar > 99999) {
+            alert("Az ár csak 1 és 99999 között lehet!");
+            return;
+        }
         try {
             EtlapDb db = new EtlapDb();
-            int success =db.etlapFelvetele(nev, leiras, ar, kategoria);
-            /*if(success == 1) {
-
+            int success = db.etlapFelvetele(nev, leiras, ar, kategoria);
+            if(success == 1) {
+                alert("Az új étel felvétele sikeres.");
             }
             else {
-
-            }*/
+                alert("Az új étel felvétele sikertelen.");
+            }
         }
         catch (SQLException e) {
             System.out.println(e);
         }
-
     }
 }
