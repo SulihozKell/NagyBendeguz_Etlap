@@ -9,7 +9,7 @@
         <columns>
             <TableColumn fx:id="nevOszlop" prefWidth="200.0" text="Név" />
             <TableColumn fx:id="arOszlop" prefWidth="50.0" text="Ár" />
-            <TableColumn fx:id="kategoriaOszlop" prefWidth="198.0" text="Kategória" />
+            <TableColumn fx:id="kategoriaOszlop" prefWidth="185.0" text="Kategória" />
         </columns>
       </TableView>
       <Button mnemonicParsing="false" onAction="#onFelvetelButtonClick" text="Új étel felvétele" />

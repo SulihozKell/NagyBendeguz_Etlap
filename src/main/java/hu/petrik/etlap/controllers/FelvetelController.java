@@ -42,8 +42,8 @@ public class FelvetelController extends Controller {
         }
         try {
             EtlapDb db = new EtlapDb();
-            int success = db.etlapFelvetele(nev, leiras, ar, kategoria);
-            if(success == 1) {
+            int success = db.newEtlap(nev, leiras, ar, kategoria);
+            if (success == 1) {
                 alert("Az új étel felvétele sikeres.");
             }
             else {

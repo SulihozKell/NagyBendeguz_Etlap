@@ -56,12 +56,14 @@ public class MainController extends Controller {
 
     public void selectedItem(MouseEvent mouseEvent) {
         // Javít
-        kivalasztottElem.setText(etlapTable.getSelectionModel().getSelectedItem().toString());
+        if (etlapTable.getSelectionModel().getSelectedItem() != null) {
+            kivalasztottElem.setText(etlapTable.getSelectionModel().getSelectedItem().toString());
+        }
     }
 
     public void onFelvetelButtonClick(ActionEvent actionEvent) {
         try {
-            Controller felvesz = ujAblak("felvetel-view.fxml", "Új étel felvétele", 540, 400);
+            Controller felvesz = newWindow("felvetel-view.fxml", "Új étel felvétele", 540, 400);
             felvesz.getStage().setOnCloseRequest(event -> tablazatEtlapFeltolt());
             felvesz.getStage().show();
         }
@@ -76,10 +78,12 @@ public class MainController extends Controller {
             alert("A törléshez előbb ki kell választani egy elemet a táblázatból.");
             return;
         }
-        Etlap torlendoEtlap = etlapTable.getSelectionModel().getSelectedItem();
-        // Megerősítés
+        Etlap deleteEtlap = etlapTable.getSelectionModel().getSelectedItem();
+        if (!confirm("Biztosan törölni szeretné a az alábbi ételt:\n" + deleteEtlap.getNev())) {
+            return;
+        }
         try {
-            db.etlapTorlese(torlendoEtlap.getId());
+            db.deleteEtlap(deleteEtlap.getId());
             tablazatEtlapFeltolt();
         }
         catch (SQLException e) {
