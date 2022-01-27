@@ -48,7 +48,8 @@ public class MainController extends Controller {
             for (Etlap etlapItem : etlapLista) {
                 etlapTable.getItems().add(etlapItem);
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             System.out.println(e);
         }
     }
@@ -63,18 +64,26 @@ public class MainController extends Controller {
             Controller felvesz = ujAblak("felvetel-view.fxml", "Új étel felvétele", 540, 400);
             felvesz.getStage().setOnCloseRequest(event -> tablazatEtlapFeltolt());
             felvesz.getStage().show();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             System.out.println(e);
         }
     }
 
     public void onTorlesButtonClick(ActionEvent actionEvent) {
-        int selectedIndexd = etlapTable.getSelectionModel().getSelectedIndex();
-        if (selectedIndexd == -1) {
+        int selectedIndex = etlapTable.getSelectionModel().getSelectedIndex();
+        if (selectedIndex == -1) {
             alert("A törléshez előbb ki kell választani egy elemet a táblázatból.");
             return;
         }
         Etlap torlendoEtlap = etlapTable.getSelectionModel().getSelectedItem();
-        // Folytat
+        // Megerősítés
+        try {
+            db.etlapTorlese(torlendoEtlap.getId());
+            tablazatEtlapFeltolt();
+        }
+        catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 }

@@ -37,4 +37,12 @@ public class EtlapDb {
         stmt.setString(4, kategoria);
         return stmt.executeUpdate();
     }
+
+    public boolean etlapTorlese(int id) throws SQLException {
+        String sql = "DELETE FROM etlap WHERE id = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, id);
+        int torlensoSor = stmt.executeUpdate();
+        return torlensoSor == 1;
+    }
 }
