@@ -29,8 +29,13 @@ public class FelvetelController extends Controller {
         try {
             ar = inputAr.getValue();
         }
+        catch (NullPointerException e) {
+            alert("Az ár megadása kötelező!");
+            return;
+        }
         catch (Exception e) {
-            System.out.println(e);
+            alert("Az értéknek 0 és 99999 között kell lennie!");
+            return;
         }
         if (nev.isEmpty() || leiras.isEmpty()) {
             alert("Nem hagyható üresen egy mező sem.");
