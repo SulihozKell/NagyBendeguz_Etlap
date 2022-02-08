@@ -45,4 +45,38 @@ public class EtlapDb {
         int torlensoSor = stmt.executeUpdate();
         return torlensoSor == 1;
     }
+
+    public boolean szazalekEmelesEtlapOsszes(int emeles) throws SQLException {
+        String sql = "UPDATE etlap SET ar = ar * (1 + ? / 100)";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, emeles);
+        int valtoztatottSorok = stmt.executeUpdate();
+        return valtoztatottSorok == 1;
+    }
+
+    public boolean szazalekEmelesEtlapKivalasztott(int id, int emeles) throws SQLException {
+        String sql = "UPDATE etlap SET ar = ar * (1 + ? / 100) WHERE id = ?";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, emeles);
+        stmt.setInt(2, id);
+        int valtoztatottSorok = stmt.executeUpdate();
+        return valtoztatottSorok == 1;
+    }
+
+    public boolean ftEmelesEtlapOsszes(int emeles) throws SQLException {
+        String sql = "UPDATE etlap SET ar = ar + ?";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, emeles);
+        int valtoztatottSorok = stmt.executeUpdate();
+        return valtoztatottSorok == 1;
+    }
+
+    public boolean ftEmelesEtlapKivalasztott(int id, int emeles) throws SQLException {
+        String sql = "UPDATE etlap SET ar = ar + ? WHERE id = ?";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, emeles);
+        stmt.setInt(2, id);
+        int valtoztatottSorok = stmt.executeUpdate();
+        return valtoztatottSorok == 1;
+    }
 }
