@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 
 import java.sql.SQLException;
@@ -50,6 +51,10 @@ public class FelvetelController extends Controller {
             int success = db.newEtlap(nev, leiras, ar, kategoria);
             if (success == 1) {
                 alert("Az új étel felvétele sikeres.");
+                inputNev.setText("");
+                inputLeiras.setText("");
+                inputAr.getValueFactory().setValue(1);
+                inputKategoria.setValue("főétel");
             }
             else {
                 alert("Az új étel felvétele sikertelen.");
