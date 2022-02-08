@@ -4,12 +4,11 @@ import hu.petrik.etlap.Controller;
 import hu.petrik.etlap.Etlap;
 import hu.petrik.etlap.EtlapDb;
 import hu.petrik.etlap.Kategoria;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
@@ -33,6 +32,7 @@ public class MainController extends Controller {
     @FXML
     private TableColumn<Etlap, String> kategoriaOszlop;
     private EtlapDb db;
+    public ChoiceBox<String> kereses;
 
     public void initialize() {
         nevOszlop.setCellValueFactory(new PropertyValueFactory<>("nev"));
@@ -42,10 +42,15 @@ public class MainController extends Controller {
             db = new EtlapDb();
             tablazatEtlapFeltolt();
             List<Kategoria> kategoriak = db.getKategoria();
+            for (Kategoria kategoria: kategoriak) {
+                kereses.getItems().add(kategoria.getNev());
+            }
         }
         catch (SQLException e) {
             errorAlert(e);
         }
+        kereses.getItems().add("Mindegyik");
+        keresesKategoria();
     }
 
     private void tablazatEtlapFeltolt() {
@@ -184,5 +189,28 @@ public class MainController extends Controller {
         catch (Exception e) {
             errorAlert(e);
         }
+    }
+
+    public void keresesKategoria() {
+        kereses.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String regi, String uj) {
+                try {
+                    if (!uj.equals("Mindegyik")) {
+                        List<Etlap> keresettLista = db.keresesEtlap(uj);
+                        etlapTable.getItems().clear();
+                        for (Etlap etlap: keresettLista) {
+                            etlapTable.getItems().add(etlap);
+                        }
+                    }
+                    else {
+                        tablazatEtlapFeltolt();
+                    }
+                }
+                catch (SQLException e) {
+                    errorAlert(e);
+                }
+            }
+        });
     }
 }
