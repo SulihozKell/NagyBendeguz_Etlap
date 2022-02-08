@@ -7,12 +7,21 @@
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.petrik.etlap.controllers.MainController">
    <HBox prefWidth="200.0">
       <children>
-           <Button mnemonicParsing="false" onAction="#onTorlesButtonClick" prefHeight="25.0" prefWidth="100.0" text="Törlés">
+          <Button mnemonicParsing="false" onAction="#onTorlesButtonClick" prefHeight="25.0" prefWidth="100.0" text="Törlés">
             <HBox.margin>
                <Insets right="15.0" />
             </HBox.margin>
-         </Button>
-           <Button mnemonicParsing="false" onAction="#onFelvetelButtonClick" prefWidth="100.0" text="Új étel felvétele" />
+          </Button>
+          <Button mnemonicParsing="false" onAction="#onFelvetelButtonClick" prefWidth="100.0" text="Új étel felvétele">
+              <HBox.margin>
+                  <Insets right="15.0" />
+              </HBox.margin>
+          </Button>
+          <Button mnemonicParsing="false" onAction="#onKategoriaButtonClick" prefWidth="100.0" text="Kategória">
+              <HBox.margin>
+                  <Insets right="15.0" />
+              </HBox.margin>
+          </Button>
       </children>
       <VBox.margin>
          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

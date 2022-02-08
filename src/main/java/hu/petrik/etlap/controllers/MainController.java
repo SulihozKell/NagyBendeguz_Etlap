@@ -33,7 +33,6 @@ public class MainController extends Controller {
     @FXML
     private TableColumn<Etlap, String> kategoriaOszlop;
     private EtlapDb db;
-    private List<Kategoria> kategoriak;
 
     public void initialize() {
         nevOszlop.setCellValueFactory(new PropertyValueFactory<>("nev"));
@@ -42,10 +41,10 @@ public class MainController extends Controller {
         try {
             db = new EtlapDb();
             tablazatEtlapFeltolt();
-            kategoriak = db.getKategoria();
+            List<Kategoria> kategoriak = db.getKategoria();
         }
         catch (SQLException e) {
-            System.out.println(e);
+            errorAlert(e);
         }
     }
 
@@ -58,7 +57,7 @@ public class MainController extends Controller {
             }
         }
         catch (Exception e) {
-            System.out.println(e);
+            errorAlert(e);
         }
     }
 
@@ -76,7 +75,7 @@ public class MainController extends Controller {
             felvesz.getStage().show();
         }
         catch (IOException e) {
-            System.out.println(e);
+            errorAlert(e);
         }
     }
 
@@ -95,7 +94,7 @@ public class MainController extends Controller {
             tablazatEtlapFeltolt();
         }
         catch (SQLException e) {
-            System.out.println(e);
+            errorAlert(e);
         }
     }
 
@@ -103,7 +102,8 @@ public class MainController extends Controller {
         int szazalekEmeles = 0;
         try {
             szazalekEmeles = szazalekSpinner.getValue();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             alert("Az ár csak szám lehet!");
             return;
         }
@@ -120,7 +120,7 @@ public class MainController extends Controller {
                 tablazatEtlapFeltolt();
             }
             catch (SQLException e) {
-                System.out.println(e);
+                errorAlert(e);
             }
         }
         else {
@@ -132,7 +132,7 @@ public class MainController extends Controller {
                 tablazatEtlapFeltolt();
             }
             catch (SQLException e) {
-                System.out.println(e);
+                errorAlert(e);
             }
         }
     }
@@ -141,7 +141,8 @@ public class MainController extends Controller {
         int ftEmeles = 0;
         try {
             ftEmeles = ftSpinner.getValue();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             alert("Az ár csak szám lehet!");
             return;
         }
@@ -158,7 +159,7 @@ public class MainController extends Controller {
                 tablazatEtlapFeltolt();
             }
             catch (SQLException e) {
-                System.out.println(e);
+                errorAlert(e);
             }
         }
         else {
@@ -170,8 +171,18 @@ public class MainController extends Controller {
                 tablazatEtlapFeltolt();
             }
             catch (SQLException e) {
-                System.out.println(e);
+                errorAlert(e);
             }
+        }
+    }
+
+    public void onKategoriaButtonClick(ActionEvent actionEvent) {
+        try {
+            Controller kategoria = newWindow("kategoria-view.fxml", "Kategória", 540, 400);
+            kategoria.getStage().show();
+        }
+        catch (Exception e) {
+            errorAlert(e);
         }
     }
 }

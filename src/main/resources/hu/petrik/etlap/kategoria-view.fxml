@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="hu.petrik.etlap.controllers.KategoriaController">
+    <HBox prefHeight="50.0" prefWidth="200.0">
+        <Button maxWidth="150.0" onAction="#onKategoriaHozzaadasButton" prefWidth="125.0" text="Hozzáadás">
+            <HBox.margin>
+                <Insets right="10.0" left="10.0" top="10.0"/>
+            </HBox.margin>
+        </Button>
+        <Button maxWidth="150.0" mnemonicParsing="false" onAction="#onKategoriaTorlesButton" prefWidth="100.0" text="Törlés">
+            <HBox.margin>
+                <Insets top="10.0"/>
+            </HBox.margin>
+        </Button>
+    </HBox>
+    <TableView fx:id="kategoriaTable" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+            <TableColumn fx:id="kategoriaNev" maxWidth="1000.0" minWidth="100.0" prefWidth="540.0" text="Név"/>
+        </columns>
+    </TableView>
+</VBox>

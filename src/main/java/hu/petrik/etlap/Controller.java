@@ -1,5 +1,6 @@
 package hu.petrik.etlap;
 
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -8,6 +9,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Optional;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public abstract class Controller {
     protected Stage stage;
@@ -41,5 +44,19 @@ public abstract class Controller {
         alert.setHeaderText(message);
         Optional<ButtonType> result = alert.showAndWait();
         return result.get() == ButtonType.OK;
+    }
+
+    protected void errorAlert(Exception e) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Hiba");
+        alert.setHeaderText(e.getClass().toString());
+        alert.setContentText(e.getMessage());
+        Timer alertTimer = new Timer();
+        alertTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(alert::show);
+            }
+        }, 400);
     }
 }

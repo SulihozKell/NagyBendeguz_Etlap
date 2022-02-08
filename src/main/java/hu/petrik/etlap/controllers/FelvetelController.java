@@ -68,7 +68,7 @@ public class FelvetelController extends Controller {
             }
         }
         catch (SQLException e) {
-            System.out.println(e);
+            errorAlert(e);
         }
     }
 }
