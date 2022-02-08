@@ -44,10 +44,31 @@ public class KategoriaController extends Controller {
     }
 
     public void onKategoriaHozzaadasButton(ActionEvent actionEvent) {
-
+        try {
+            Controller kategoriaFelvetel = newWindow("kategoria_felvetel-view.fxml", "Kategória hozzáadása", 300, 100);
+            kategoriaFelvetel.getStage().setOnCloseRequest(event -> tablazatKategoriaFeltolt());
+            kategoriaFelvetel.getStage().show();
+        }
+        catch (Exception e ) {
+            errorAlert(e);
+        }
     }
 
     public void onKategoriaTorlesButton(ActionEvent actionEvent) {
-
+        if (kategoriaTable.getSelectionModel().getSelectedItem() == null) {
+            alert("A törléshez előbb ki kell választani egy elemet a táblázatból.");
+            return;
+        }
+        Kategoria deleteKategoria = kategoriaTable.getSelectionModel().getSelectedItem();
+        if (!confirm("Biztosan törölni szeretné a az alábbi kategóriát:\n" + deleteKategoria.getNev())) {
+            return;
+        }
+        try {
+            db.deleteKategoria(deleteKategoria.getId());
+            tablazatKategoriaFeltolt();
+        }
+        catch (SQLException e) {
+            errorAlert(e);
+        }
     }
 }

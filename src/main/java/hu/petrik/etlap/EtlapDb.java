@@ -93,4 +93,19 @@ public class EtlapDb {
         }
         return kategoriaList;
     }
+
+    public boolean deleteKategoria(int id) throws SQLException {
+        String sql = "DELETE FROM kategoria WHERE id = ?";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, id);
+        int valtoztatott = stmt.executeUpdate();
+        return valtoztatott == 1;
+    }
+
+    public int newKategoria(String nev) throws SQLException {
+        String sql="INSERT INTO kategoria (nev) VALUES (?)";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setString(1, nev);
+        return stmt.executeUpdate();
+    }
 }
