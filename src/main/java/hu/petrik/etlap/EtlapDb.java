@@ -84,10 +84,10 @@ public class EtlapDb {
         List<Kategoria> kategoriaList = new ArrayList<>();
         Statement stmt = connection.createStatement();
         String sql = "SELECT * FROM kategoria ORDER BY id";
-        ResultSet resultSet = stmt.executeQuery(sql);
-        while (resultSet.next()) {
-            int id = resultSet.getInt("id");
-            String nev = resultSet.getString("nev");
+        ResultSet result = stmt.executeQuery(sql);
+        while (result.next()) {
+            int id = result.getInt("id");
+            String nev = result.getString("nev");
             Kategoria kategoria = new Kategoria(id, nev);
             kategoriaList.add(kategoria);
         }
