@@ -55,9 +55,9 @@ public class MainController extends Controller {
     }
 
     public void selectedItem(MouseEvent mouseEvent) {
-        // Javít
         if (etlapTable.getSelectionModel().getSelectedItem() != null) {
-            kivalasztottElem.setText(etlapTable.getSelectionModel().getSelectedItem().toString());
+            Etlap kivalasztott = etlapTable.getSelectionModel().getSelectedItem();
+            kivalasztottElem.setText(kivalasztott.getLeiras());
         }
     }
 
