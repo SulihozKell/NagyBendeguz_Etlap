@@ -17,15 +17,7 @@
             <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="100" initialValue="1000" max="99999" min="1" />
         </valueFactory>
     </Spinner>
-    <ChoiceBox fx:id="inputKategoria" minWidth="100.0" prefWidth="200.0" value="5" GridPane.columnIndex="1" GridPane.rowIndex="3">
-        <items>
-            <FXCollections fx:factory="observableArrayList">
-                <String fx:value="előétel" />
-                <String fx:value="főétel" />
-                <String fx:value="desszert" />
-            </FXCollections>
-        </items>
-    </ChoiceBox>
+    <ChoiceBox fx:id="inputKategoria" minWidth="100.0" prefWidth="200.0" value="5" GridPane.columnIndex="1" GridPane.rowIndex="3" />
     <Button minWidth="100.0" mnemonicParsing="false" onAction="#onFelvetelButtonClick" prefWidth="200.0" text="Hozzáad" GridPane.columnIndex="1" GridPane.rowIndex="4" />
     <columnConstraints>
         <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="30.0" prefWidth="100.0" />

@@ -21,6 +21,21 @@ public class FelvetelController extends Controller {
     public Spinner<Integer> inputAr;
     @FXML
     public ChoiceBox<String> inputKategoria;
+    private EtlapDb db;
+    private List<Kategoria> listKategoria;
+
+    public void initialize() {
+        try {
+            db = new EtlapDb();
+            listKategoria = db.getKategoria();
+            for (Kategoria kategoria : listKategoria) {
+                inputKategoria.getItems().add(kategoria.getNev());
+            }
+        }
+        catch (SQLException e) {
+            errorAlert(e);
+        }
+    }
 
     @FXML
     public void onFelvetelButtonClick(ActionEvent actionEvent) {
@@ -47,10 +62,8 @@ public class FelvetelController extends Controller {
             return;
         }
         try {
-            EtlapDb db = new EtlapDb();
-            List<Kategoria> kategoriaList = db.getKategoria();
             int kategoria_id = 0;
-            for (Kategoria kategoria : kategoriaList) {
+            for (Kategoria kategoria : listKategoria) {
                 if (kategoria.getNev().equals(inputKategoria.getValue())) {
                     kategoria_id = kategoria.getId();
                 }
