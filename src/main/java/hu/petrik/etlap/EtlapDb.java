@@ -14,27 +14,27 @@ public class EtlapDb {
     public List<Etlap> getEtlap() throws SQLException {
         List<Etlap> listEtlap = new ArrayList<>();
         Statement stmt = connection.createStatement();
-        String sql = "SELECT * FROM etlap";
+        String sql = "SELECT * FROM etlap INNER JOIN kategoria ON (etlap.kategoria_id = kategoria.id)";
         ResultSet result = stmt.executeQuery(sql);
         while (result.next()) {
             int id = result.getInt("id");
             String nev = result.getString("nev");
             String leiras = result.getString("leiras");
             int ar = result.getInt("ar");
-            String kategoria = result.getString("kategoria");
+            String kategoria = result.getString("kategoria.nev");
             Etlap etlap = new Etlap(id, nev, leiras, ar, kategoria);
             listEtlap.add(etlap);
         }
         return listEtlap;
     }
 
-    public int newEtlap(String nev, String leiras, int ar, String kategoria) throws SQLException {
-        String sql = "INSERT INTO etlap(nev, leiras, ar, kategoria) VALUES (?,?,?,?)";
+    public int newEtlap(String nev, String leiras, int ar, int kategoria_id) throws SQLException {
+        String sql = "INSERT INTO etlap(nev, leiras, ar, kategoria_id) VALUES (?,?,?,?)";
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setString(1, nev);
         stmt.setString(2, leiras);
         stmt.setInt(3, ar);
-        stmt.setString(4, kategoria);
+        stmt.setInt(4, kategoria_id);
         return stmt.executeUpdate();
     }
 
@@ -78,5 +78,19 @@ public class EtlapDb {
         stmt.setInt(2, id);
         int valtoztatottSorok = stmt.executeUpdate();
         return valtoztatottSorok == 1;
+    }
+
+    public List<Kategoria> getKategoria() throws SQLException {
+        List<Kategoria> kategoriaList = new ArrayList<>();
+        Statement stmt = connection.createStatement();
+        String sql = "SELECT * FROM kategoria ORDER BY id";
+        ResultSet resultSet = stmt.executeQuery(sql);
+        while (resultSet.next()) {
+            int id = resultSet.getInt("id");
+            String nev = resultSet.getString("nev");
+            Kategoria kategoria = new Kategoria(id, nev);
+            kategoriaList.add(kategoria);
+        }
+        return kategoriaList;
     }
 }

@@ -3,6 +3,7 @@ package hu.petrik.etlap.controllers;
 import hu.petrik.etlap.Controller;
 import hu.petrik.etlap.Etlap;
 import hu.petrik.etlap.EtlapDb;
+import hu.petrik.etlap.Kategoria;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -32,6 +33,7 @@ public class MainController extends Controller {
     @FXML
     private TableColumn<Etlap, String> kategoriaOszlop;
     private EtlapDb db;
+    private List<Kategoria> kategoriak;
 
     public void initialize() {
         nevOszlop.setCellValueFactory(new PropertyValueFactory<>("nev"));
@@ -40,6 +42,7 @@ public class MainController extends Controller {
         try {
             db = new EtlapDb();
             tablazatEtlapFeltolt();
+            kategoriak = db.getKategoria();
         }
         catch (SQLException e) {
             System.out.println(e);

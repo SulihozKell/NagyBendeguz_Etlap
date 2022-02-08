@@ -2,14 +2,15 @@ package hu.petrik.etlap.controllers;
 
 import hu.petrik.etlap.Controller;
 import hu.petrik.etlap.EtlapDb;
+import hu.petrik.etlap.Kategoria;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class FelvetelController extends Controller {
     @FXML
@@ -26,7 +27,6 @@ public class FelvetelController extends Controller {
         String nev = inputNev.getText().trim();
         String leiras = inputLeiras.getText().trim();
         int ar = 0;
-        String kategoria = inputKategoria.getSelectionModel().getSelectedItem();
         try {
             ar = inputAr.getValue();
         }
@@ -48,7 +48,14 @@ public class FelvetelController extends Controller {
         }
         try {
             EtlapDb db = new EtlapDb();
-            int success = db.newEtlap(nev, leiras, ar, kategoria);
+            List<Kategoria> kategoriaList = db.getKategoria();
+            int kategoria_id = 0;
+            for (Kategoria kategoria : kategoriaList) {
+                if (kategoria.getNev().equals(inputKategoria.getValue())) {
+                    kategoria_id = kategoria.getId();
+                }
+            }
+            int success = db.newEtlap(nev, leiras, ar, kategoria_id);
             if (success == 1) {
                 alert("Az új étel felvétele sikeres.");
                 inputNev.setText("");
